@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti 💛 🌻</title>
+    <style>
+        :root {
+            --color-amarillo: #ffeb3b;
+            --brillo-oro: #fbc02d;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            overflow: hidden; text-align: center;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .stars-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute; background: white; border-radius: 50%;
+            opacity: 0.5; animation: twinkle var(--duration) infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .content {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            min-height: 100vh;
+            min-height: 100svh;
+            box-sizing: border-box;
+            padding: 24px;
+            padding-top: max(24px, env(safe-area-inset-top));
+            padding-right: max(20px, env(safe-area-inset-right));
+            padding-bottom: max(24px, env(safe-area-inset-bottom));
+            padding-left: max(20px, env(safe-area-inset-left));
+        }
+
+        .vibrant-text {
+            width: min(100%, 720px);
+            box-sizing: border-box;
+            padding: 0 8px;
+        }
+
+        .vibrant-text h1 {
+            color: var(--color-amarillo);
+            font-size: clamp(1.65rem, 6vw, 2.2rem);
+            line-height: 1.15;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--brillo-oro), 0 0 20px var(--brillo-oro);
+            animation: pulse-glow 2s infinite alternate;
+            margin: 0 0 15px;
+            overflow-wrap: break-word;
+        }
+
+        .vibrant-text p {
+            color: #fff9c4;
+            font-size: clamp(1rem, 4.5vw, 1.2rem);
+            line-height: 1.5;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            margin: 0;
+        }
+
+        @keyframes pulse-glow {
+            from { text-shadow: 0 0 10px var(--brillo-oro), 0 0 20px var(--brillo-oro); }
+            to { text-shadow: 0 0 20px var(--brillo-oro), 0 0 40px #ffee58, 0 0 10px #fff; }
+        }
+
+        #start-btn {
+            width: min(100%, 360px);
+            min-height: 56px;
+            padding: 15px 24px;
+            font-size: clamp(1rem, 4.5vw, 1.3rem);
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fdd835, #f9a825);
+            color: #4e342e; border: none; border-radius: 50px;
+            font-weight: bold; cursor: pointer;
+            box-shadow: 0 0 25px rgba(253, 216, 53, 0.5);
+            z-index: 100; transition: all 0.3s ease;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #start-btn:active {
+            transform: scale(0.97);
+        }
+
+        .girasol {
+            position: absolute; z-index: 5; pointer-events: none;
+            filter: drop-shadow(0 0 10px var(--brillo-oro));
+            animation: galaxy-float 6s linear forwards;
+        }
+
+        @keyframes galaxy-float {
+            0% { transform: translate(0, 70vh) rotate(0deg) scale(0); opacity: 0; }
+            2% { opacity: 1; transform: translate(var(--side-move), 55vh) scale(1); }
+            100% { transform: translate(calc(var(--side-move) * 2), -70vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        /* Ajustes específicos para móviles */
+        @media (max-width: 600px) {
+            body, html {
+                overflow: hidden;
+            }
+
+            .content {
+                padding: 20px 16px;
+            }
+
+            .girasol {
+                filter: drop-shadow(0 0 7px var(--brillo-oro));
+            }
+        }
+
+        @media (max-width: 380px) {
+            .content {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            #start-btn {
+                min-height: 52px;
+                padding: 13px 18px;
+            }
+
+            .vibrant-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .vibrant-text p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .content {
+                justify-content: flex-start;
+                overflow-y: auto;
+                padding-top: max(18px, env(safe-area-inset-top));
+                padding-bottom: max(18px, env(safe-area-inset-bottom));
+            }
+
+            .vibrant-text h1 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .vibrant-text p {
+                font-size: 0.95rem;
+            }
+
+            #start-btn {
+                min-height: 48px;
+                padding: 12px 20px;
+            }
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="stars-container" id="starsBox"></div>
+
+    <div id="ui" class="content">
+        <button id="start-btn">🌻 Pulsa aqui 🌻</button>
+        
+        <div id="message" class="hidden vibrant-text">
+            <h1>¡Feliz día de las flores amarillas!</h1>
+            <p>Amarillas como el sol,<br>ya que tú iluminas mi vida. ✨</p>
+        </div>
+    </div>
+
+    <audio id="musicaFlor" loop>
+        <source src="./audio/audio.wav" type="audio/wav">
+    </audio>
+
+    <script>
+        const starsBox = document.getElementById('starsBox');
+        const btn = document.getElementById('start-btn');
+        const message = document.getElementById('message');
+        const audio = document.getElementById('musicaFlor');
+
+        function initStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 'px';
+                star.style.width = size; star.style.height = size;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+                starsBox.appendChild(star);
+            }
+        }
+        initStars();
+
+        btn.addEventListener('click', () => {
+            btn.classList.add('hidden');
+            message.classList.remove('hidden');
+            
+            // Reproducir música directa
+            audio.play().catch(e => console.log("Error al reproducir:", e));
+
+            // Primera flor inmediatamente al pulsar el botón
+            spawnSunflower();
+
+            // Luego continúan apareciendo periódicamente
+            setInterval(spawnSunflower, 400);
+        });
+
+        function spawnSunflower() {
+            const sunflower = document.createElement('div');
+            sunflower.className = 'girasol';
+            sunflower.innerHTML = '🌻';
+            sunflower.style.left = Math.random() * 90 + 5 + 'vw';
+            sunflower.style.setProperty('--side-move', (Math.random() * 100 - 50) + 'px');
+            sunflower.style.fontSize = (Math.random() * 20 + 30) + 'px';
+            document.body.appendChild(sunflower);
+            setTimeout(() => sunflower.remove(), 6000);
+        }
+    </script>
+</body>
+</html>
